@@ -8,16 +8,16 @@ import { RouterProvider, BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
   return (
-    <PubliLayout>
+    // <PubliLayout>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Todo />} />
-          {/* <Route path='/update/:itemId' element={<Todo content={{ modal: true }} />} /> */}
-          <Route path='/delete/:itemId' element={<Modal />} />
-          <Route path='/timer' element={<Timer />} />
+          <Route element={<PubliLayout />}>
+            <Route path='todo' element={<Todo />} />
+            <Route path='timer' element={<Timer />} />
+          </Route>
         </Routes>
       </BrowserRouter>
-    </PubliLayout>
+    // </PubliLayout>
   );
 }
 

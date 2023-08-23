@@ -1,37 +1,46 @@
 import { v4 as uuidv4 } from 'uuid';
-import React, { useContext, useId, useState, useEffect } from 'react'
+import React, { useContext, useRef, useState, useEffect } from 'react'
 import { TodoContext } from '../store/globalContext';
+import TimeSelector from './TimeSelector';
 
 
-export default function Modal({ content, data, handleClose, ...attrs }) {
-    const items = useContext(TodoContext);
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+export default function Modal({ content, data,timer, handleClose,handleStorage,...attrs }) {
+    const [title, setTitle] = useState(data?.at(1));
+    const [description, setDescription] = useState(data?.at(2));
+    const [duration, setDuration] = useState(data?.at(4)||{minutes:0,seconds:0});
+
+    const titleRef = useRef(null);
+
     const updateTitle = (event) => {
         setTitle(event.target.value);
     }
     const updateDescription = (event) => {
         setDescription(event.target.value)
     }
-
     const handleAdd = (event) => {
         event.preventDefault();
-        items.dispatchTodoItems({
-            type: 'ADD', payload: { id: uuidv4(), title, description }
-        });
-        // localStorage.setItem('data' + uuidv4(), [uuidv4(), title, description]);
+        let new_id= Date.now();
+        if(timer){
+            localStorage.setItem(new_id,JSON.stringify([new_id, title, description,'timer',duration.minutes,duration.seconds]));
+        }
+        else{
+            localStorage.setItem(new_id,JSON.stringify([new_id, title, description,'todo']));
+        }
+        handleStorage()
+        titleRef.current="";
         setTitle('');
         setDescription('');
-        window.my_modal_1.close();
+        handleClose();
     }
     const handleUpdate = (event) => {
         event.preventDefault();
-        console.log(title)
-        items.dispatchTodoItems({
-            type: 'UPDATE', payload: { id: data[0].id, title: title || data[0].title, description: description || data[0].description }
-        });
-        // console.log(items.todoItems)
-        // localStorage.setItem('data' + uuidv4(), [uuidv4(), title, description]);
+        if(timer){
+            localStorage.setItem(data[0],JSON.stringify([data[0],  title||data[1]  , description||data[2],"timer",duration.minutes,duration.seconds]));
+        }
+        else{
+            localStorage.setItem(data[0],JSON.stringify( [data[0], title||data[1]  , description||data[2],data[3] ]));
+        }
+        handleStorage()
         setTitle('');
         setDescription('');
         handleClose();
@@ -39,15 +48,23 @@ export default function Modal({ content, data, handleClose, ...attrs }) {
     return (
         <>
             <form className="modal-box flex flex-col justify-center" onSubmit={data ? handleUpdate : handleAdd}>
-                <h3 className="font-bold text-lg">Add Task</h3>
-                <label htmlFor="title">Title  : </label>
-                {data ? <input type="text" onChange={updateTitle} id="title" placeholder="Type title" className="input input-bordered input-md w-full max-w-xs" defaultValue={data[0].title} /> : <input type="text" onChange={updateTitle} id="title" placeholder="Type title" className="input input-bordered input-md w-full max-w-xs" />}
+                <h3 className="font-bold text-lg mx-auto mb-5">{timer ?"Add Task To Queue":"Add Task"}</h3>
 
-                <label htmlFor="description" >Description  : </label>
-                {data ? <textarea onChange={updateDescription} id='description' className="textarea textarea-bordered" placeholder="Type description" defaultValue={data[0].description}></textarea> : <textarea onChange={updateDescription} className="textarea textarea-bordered" id='description' placeholder="Type description"></textarea>}
-                <div className="modal-action">
-                    {data ? <button className='px-2' type='submit' >Update</button> : <button type='submit'>Add</button>}
-                    <button type='reset' onClick={handleClose} >Close</button>
+                <label htmlFor="description" className='mb-3'>Title  : </label>
+                {data ? <input type="text" onChange={updateTitle} id="title" placeholder="Type title" className="input input-bordered input-md w-full" value={title||data[1]} /> : <input type="text" onChange={updateTitle} id="title" placeholder="Type title" className="input input-bordered input-md w-full " value={title} />}
+
+                <label htmlFor="description" className='mb-3 mt-3'>Description  : </label>
+                {data ? <textarea onChange={updateDescription} id='description' className="textarea textarea-bordered" placeholder="Type description" value={description||data[2]} ></textarea> : <textarea onChange={updateDescription} className="textarea textarea-bordered" id='description' placeholder="Type description" value={description}></textarea>}
+                
+                {timer &&
+                <>
+                <label htmlFor="Duration" className='mb-3 mt-3 flex flex-row gap-2'>Duration  : <p className='text-warning'>(add the duration of this task)</p></label>
+                <div className="mx-auto"><TimeSelector updateDuration={setDuration}/></div></>
+                }
+                
+                <div className="modal-action flex flex-row gap-5">
+                    {data ? <button className='' type='submit' >Update</button> : <button className='' type='submit' >Add</button>}
+                    <button type='reset' onClick={handleClose} className='mr-5' >Close</button>
                 </div>
             </form>
         </>
