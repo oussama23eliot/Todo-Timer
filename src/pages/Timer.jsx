@@ -5,6 +5,7 @@ import Modal from '../components/Modal'
 import BaseTimer from '../components/BaseTimer';
 import TimerTable from '../components/TimerTable';
 import {  TodoContext } from '../store/globalContext';
+import PubliLayout from '../layouts/PubliLayout';
 export default function Timer() {
     const timertasks = useContext(TodoContext);
 
@@ -46,6 +47,7 @@ export default function Timer() {
         window.my_modal_1.close();
     };    
     return (
+        <PubliLayout>
         <div className='flex flex-col'>
         <div className="px-10 pt-4 ">
             <ButtonDialog handleOpen={handleOpen} />
@@ -61,5 +63,6 @@ export default function Timer() {
             </div>
         </div>
         </div>
+        </PubliLayout>
     )
 }
