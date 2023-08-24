@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Todo-Timer/static/css/main.21a6b52a.css",
-    "main.js": "/Todo-Timer/static/js/main.fbbd1cec.js",
+    "main.js": "/Todo-Timer/static/js/main.0be214cf.js",
     "static/js/787.ed6d61f2.chunk.js": "/Todo-Timer/static/js/787.ed6d61f2.chunk.js",
     "index.html": "/Todo-Timer/index.html",
     "main.21a6b52a.css.map": "/Todo-Timer/static/css/main.21a6b52a.css.map",
-    "main.fbbd1cec.js.map": "/Todo-Timer/static/js/main.fbbd1cec.js.map",
+    "main.0be214cf.js.map": "/Todo-Timer/static/js/main.0be214cf.js.map",
     "787.ed6d61f2.chunk.js.map": "/Todo-Timer/static/js/787.ed6d61f2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.21a6b52a.css",
-    "static/js/main.fbbd1cec.js"
+    "static/js/main.0be214cf.js"
   ]
 }
