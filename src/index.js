@@ -14,11 +14,11 @@ const router = createBrowserRouter([
     element: <Todo />,
   },
   {
-    path: "/todo",
+    path: "todo",
     element: <Todo />,
   },
   {
-    path: "/timer",
+    path: "timer",
     element: <Timer />,
   },
 ]);
