@@ -3,17 +3,20 @@ import Modal from './components/Modal';
 import PubliLayout from './layouts/PubliLayout';
 import Timer from './pages/Timer';
 import Todo from './pages/Todo';
-import Navbar from '../components/navbar'
-
 
 import { RouterProvider, BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
   return (
-    <div className='scroll-smooth pb-20'>
-      <Navbar />
-      <Todo/>
-    </div>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<PubliLayout />}>
+            <Route path='/Todo-Timer' element={<Todo />} />
+            <Route path='/Todo-Timer/todo' element={<Todo />} />
+            <Route path='/Todo-Timer/timer' element={<Timer />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
   );
 }
 

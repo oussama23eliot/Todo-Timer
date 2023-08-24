@@ -29,7 +29,7 @@ export default function Todo({ content, ...attrs }) {
         window.my_modal_1.close();
     }
     return (
-        <PubliLayout>
+        <>
             <div className="flex flex-row px-10 pt-4 justify-between">
                 <FiltersList handleStorage={handleStorage} />
                 <ButtonDialog handleOpen={handleOpen} />
@@ -38,6 +38,6 @@ export default function Todo({ content, ...attrs }) {
                 <Modal handleClose={handleClose} handleStorage={handleStorage} />
             </dialog>
             <Grid tasks={tasks} handleStorage={handleStorage}/>
-        </PubliLayout>
+        </>
     )
 }

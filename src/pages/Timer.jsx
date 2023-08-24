@@ -47,7 +47,6 @@ export default function Timer() {
         window.my_modal_1.close();
     };    
     return (
-        <PubliLayout>
         <div className='flex flex-col'>
         <div className="px-10 pt-4 ">
             <ButtonDialog handleOpen={handleOpen} />
@@ -63,6 +62,5 @@ export default function Timer() {
             </div>
         </div>
         </div>
-        </PubliLayout>
     )
 }
