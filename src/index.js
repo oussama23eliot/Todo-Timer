@@ -5,29 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './main.css'
 import { GlobalProvider } from './store/globalContext';
-import Todo from './pages/Todo';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Timer from './pages/Timer';
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Todo />,
-  },
-  {
-    path: "todo",
-    element: <Todo />,
-  },
-  {
-    path: "timer",
-    element: <Timer />,
-  },
-]);
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <GlobalProvider>
-      <RouterProvider router={router} />
+      <App />
     </GlobalProvider>
   </React.StrictMode>
 );

@@ -8,16 +8,35 @@ import { RouterProvider, BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
   return (
-      <BrowserRouter>
-        <Routes>
-          <Route element={<PubliLayout />}>
-            <Route path='/' element={<Todo />} />
-            <Route path='todo' element={<Todo />} />
-            <Route path='timer' element={<Timer />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-  );
+    <div className="App">
+      <div>
+        <nav>
+          <ul id="navigation">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/todo">About</Link>
+            </li>
+            <li>
+              <Link to="/timer">Contact</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <Switch>
+        <Route exact path="/">
+          <Todo/>
+        </Route>
+        <Route exact path="/todo">
+          <Todo/>
+        </Route>
+        <Route path="/timer">
+         <Timer/>
+        </Route>
+      </Switch>
+    </div>
+    );
 }
 
 export default App;
