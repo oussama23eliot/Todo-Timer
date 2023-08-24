@@ -11,8 +11,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<PubliLayout />}>
-            <Route path='todo' element={<Todo />} />
-            <Route path='timer' element={<Timer />} />
+            <Route path='/Todo-Timer' element={<Todo />} />
+            <Route path='/Todo-Timer/todo' element={<Todo />} />
+            <Route path='/Todo-Timer/timer' element={<Timer />} />
           </Route>
         </Routes>
       </BrowserRouter>
