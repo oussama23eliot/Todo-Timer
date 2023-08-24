@@ -8,7 +8,7 @@ export default function PubliLayout({ children, ...attr }) {
     return (
         <div className='scroll-smooth pb-20'>
             <Navbar />
-            <Todo/>
+            <Outlet/>
         </div>
 
     )
