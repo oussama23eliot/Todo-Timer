@@ -3,7 +3,6 @@ import { createContext, useReducer } from 'react';
 export const TodoContext = createContext([]);
 const todoReducer = (state, action) => {
     switch (action.type) {
-        
         case 'ADD': return [...action.payload];
         case 'NEXT': return state.map((item) => {
             if (item.id == action.payload.id) {

@@ -29,7 +29,7 @@ export default function BaseTimer({tasks,playQueue,handleStorage,startIndex,setS
     timerId=null;
   }
   useEffect(()=>{
-
+    setTimeRemaining(prev=>({...prev,minutes:timertasks.todoItems[4],seconds:timertasks.todoItems[5]}));
     if(!isPausing)
     setTimeRemaining(prev=>({...prev,minutes:timertasks.todoItems[4],seconds:timertasks.todoItems[5]}));
     if(tasks.length>1&&playQueue&&currentIndex<tasks.length){
@@ -41,6 +41,7 @@ export default function BaseTimer({tasks,playQueue,handleStorage,startIndex,setS
   },[timertasks.todoItems,tasks,isStopped,currentIndex,playQueue]);
   useEffect(()=>{
     setCurrentIndex(startIndex+1);
+    setTimeRemaining(prev=>({...prev,minutes:timertasks.todoItems[4],seconds:timertasks.todoItems[5]}));
   },[startIndex])
   const handleQueue=()=>{
     if((currentIndex<=tasks.length)&&playQueue&&!isStopped&&timeRemaining.minutes==0&&timeRemaining.seconds==0&&timerId){
@@ -50,10 +51,12 @@ export default function BaseTimer({tasks,playQueue,handleStorage,startIndex,setS
   const handleNext=()=>{
     setStartIndex(prev => prev + 1 )
     timertasks.dispatchTodoItems({'type':"ADD","payload": tasks[currentIndex]})
+    stopTimer()
   }
   const handlePrevious=()=>{
     setStartIndex(prev => prev - 1 )
     timertasks.dispatchTodoItems({'type':"ADD","payload": tasks[startIndex -1]})
+    stopTimer()
   }
   useEffect(()=>{
     handleQueue()
@@ -90,15 +93,15 @@ export default function BaseTimer({tasks,playQueue,handleStorage,startIndex,setS
     setProgress(Math.floor(((parseInt(timeRemaining.minutes)+parseInt(timeRemaining.seconds)/60)/(parseInt(timertasks.todoItems[4])+parseInt(timertasks.todoItems[5])/60))*100))
   }
   return (
-        <div className="w-5/6 sm:w-full  flex flex-col  items-center mr-3 ml-3">
+        <div className="w-5/6 sm:w-full  flex flex-col items-center mr-3 ml-3">
                 <div className="w-full flex flex-row items-left justify-between">
                     <div>
                     <p className='label-text text-gray-500'>Up Next : <span className='text-xl font-semibold'>{timertasks.nextItems[1]}</span></p>
                     <p className='label-text-alt text-gray-500'>Duration : <span className='label-text text-gray-500'>{timertasks.nextItems[4]}:{timertasks.nextItems[5]}</span></p>
                     <h1 className='text-3xl'>{timertasks.todoItems[1]}</h1>
                     </div>
-                    <div className="w-fit flex flex-col-reverse justify-center mx-auto sm:flex-row items-center gap-2">
-                        <span className="countdown font-semibold text-3xl mr-8">
+                    <div className="w-fit flex flex-col-reverse  justify-center sm:flex-row items-center gap-4 sm:gap-8">
+                        <span className="countdown text-center font-semibold text-4xl ">
                             <span style={{"--value":timeRemaining.minutes}}></span>:
                             <span style={{"--value":timeRemaining.seconds}}></span>
                         </span>

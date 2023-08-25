@@ -7,7 +7,7 @@ import Todo from '../pages/Todo'
 export default function PubliLayout({ children, ...attr }) {
     return (
         <div className='scroll-smooth pb-20'>
-            <Navbar />
+            <Navbar/>
             <Outlet/>
         </div>
 
