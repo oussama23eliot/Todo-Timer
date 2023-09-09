@@ -76,7 +76,7 @@ export default function BaseTimer({tasks,playQueue,handleStorage,startIndex,setS
         }
     }
     handleProgress();
-  },[timeRemaining])
+  },[timeRemaining,tasks])
   const startTimer=()=>{
     setIsPausing(false);
     setHasStarted(true);
