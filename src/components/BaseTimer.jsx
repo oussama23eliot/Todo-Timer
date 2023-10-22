@@ -36,7 +36,7 @@ export default function BaseTimer({tasks,playQueue,handleStorage,startIndex,setS
       timertasks.dispatchNextItems({'type':"ADD","payload": tasks[currentIndex]})
     }
     else{
-      timertasks.dispatchNextItems({'type':"ADD","payload": ["sksksaakk",  "None",  "", "timer", "--","--"]})
+      timertasks.dispatchNextItems({'type':"ADD","payload": ["None",  "None",  "", "timer", "--","--"]})
     }
   },[timertasks.todoItems,tasks,isStopped,currentIndex,playQueue]);
   useEffect(()=>{
@@ -76,7 +76,7 @@ export default function BaseTimer({tasks,playQueue,handleStorage,startIndex,setS
         }
     }
     handleProgress();
-  },[timeRemaining,tasks])
+  },[timeRemaining])
   const startTimer=()=>{
     setIsPausing(false);
     setHasStarted(true);
@@ -88,7 +88,6 @@ export default function BaseTimer({tasks,playQueue,handleStorage,startIndex,setS
     }))
     },1000)
   }
-
   const handleProgress=()=>{
     setProgress(Math.floor(((parseInt(timeRemaining.minutes)+parseInt(timeRemaining.seconds)/60)/(parseInt(timertasks.todoItems[4])+parseInt(timertasks.todoItems[5])/60))*100))
   }
